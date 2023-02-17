@@ -70,7 +70,7 @@ public:
             return true;
         }
         else {
-            Serial.print("le cable fonnction pas");
+            Serial.print("le cable fonnction pas ");
             return false;
         }
     }
