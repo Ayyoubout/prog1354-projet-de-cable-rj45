@@ -37,8 +37,8 @@ public:
         digitalWrite(maronBlan, HIGH);
         digitalWrite(maron, HIGH);
     }
-    //cette fonction pour essayer est ce que le caple ca marche ou ca marche pas 
-    // pour esssayer j'ai fais un tableau de 8 casier et j'ai rediger le contenu de chaque casier 
+    //cette fonction pour essayer est ce que le cable ca marche ou ca marche pas 
+    // pour esssayer j'ai fais un tableau de 8 casier et j'ai rediger le contenu de chaque casier pour tester chaque brouche seul 
     bool teste(){
         int TabGauche[8] = {};
         int somme = 0; 
@@ -58,7 +58,7 @@ public:
         //Serial.println(TabGauche[6]);
         TabGauche[7] = digitalRead(maron);
         //Serial.println(TabGauche[7]);
-    //quan le centenu de i (les 8)s'arrive plus la somme donc le cable fonction il y a un signale entre les 16 brouche 
+    //quan le centenu de i (les 8)s'arrive plus la somme donc le cable fonction il y a un signale entre les 16 brouche sinon le cable fontion pas
         for (int i = 0; i < 8; i++)
         {
             somme = somme + TabGauche[i];
@@ -74,7 +74,7 @@ public:
             return false;
         }
     }
-    // fonction pour lire le signale est ce que arriver au non 
+    // fonction pour arreter le signal
     void arreter(){
         digitalWrite(vertBlan, LOW);
         digitalWrite(verte, LOW);
@@ -115,21 +115,22 @@ public:
         
     }
 };    
-//j'ai fais une fonction pour les 3 cas 
+//j'ai cree trois tableau dan la fontion nature
 void nature(Porte p1, Porte p2){
 
     int somme_d = 0;
     int somme_c = 0;
-    //declaration de les trois fonctionne envoi, recevoir_d, recevoir_c 
+    //declaration de le contenu des tableau envoi, recevoir_d, recevoir_c 
     int envoi[8]      = {p1.vertBlan ,p1.verte, p1.orangeBlan, p1.bleu, p1.bleuBlan, p1.orange, p1.maronBlan, p1.maron};
     int recevoir_d[8] = {p2.vertBlan ,p2.verte, p2.orangeBlan, p2.bleu, p2.bleuBlan, p2.orange, p2.maronBlan, p2.maron};
     int recevoir_c[8] = {p2.orangeBlan , p2.orange, p2.vertBlan, p2.bleu, p2.bleuBlan, p2.verte, p2.maronBlan, p2.maron};
-    //j'ai fais une seule boucle pour les trois fonctionne la premiere declaration pour la premiere fonnction 
+    //j'ai fais une boucle for les trois cas 
     
     for (int i = 0; i < 8; i++)
     {
-        //allume tout le contenu de 1ere tableau 
-        //lire tout le contenu qui recevoi le 2eme tableau et fair +1 a la somme 
+       //allume tout le contenu de 1ere tableau 
+       //lire tout le contenu qui recevoi le 2eme tableau quan la somme =8 donc le cable droit
+       //lire le signa qui recevoi a les brouche si tout le contenu qui recevoi le contenu de 3eme tableau et la somme =8 donc le cable droit
         
         digitalWrite(envoi[i], HIGH);
         if (digitalRead(recevoir_d[i]) == HIGH)
@@ -143,6 +144,7 @@ void nature(Porte p1, Porte p2){
     }
     //si la somme le 2eme tableau = 8 donc le cable c'est un cable drois 
     //sinon la somme de 3eme tableau = 8 donc le cable est croisee
+    //sinon le gignale qui recevoi les brache ni le contenu de tableau 1 ni de tableau 2 donc le cable ni droit ni crise 
     if (somme_d == 8)
     {
         Serial.println(" droit");
